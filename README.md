@@ -29,7 +29,7 @@ compile 'com.mylhyl:cygadapter:1.0.0'
 <img src="preview/gif.gif" width="240px"/>
 
 #使用
-1.简单数据结构`CygAdapter`
+###### 1.简单的[CygAdapter](cygadapter/src/main/java/com/mylhyl/cygadapter/CygAdapter.java)
 
 ```java
 mAdapter = new CygAdapter<Student>(getContext(), android.R.layout.simple_list_item_1, datas) {
@@ -46,7 +46,7 @@ mAdapter = new CygAdapter<Student>(getContext(), android.R.layout.simple_list_it
 };
 setListAdapter(mAdapter);
 ```
-2.多视图数据结构`CygMultiViewTypeAdapter`可参考[ChatAdapter.java](sample/src/main/java/com/mylhyl/cygadapter/sample/ChatAdapter.java)
+#### 2.多视图[CygMultiViewTypeAdapter](cygadapter/src/main/java/com/mylhyl/cygadapter/CygMultiViewTypeAdapter.java)
 - 内部已定义`SparseIntArray`变量，用于存储视图数据`<k,v> = <viewType,layoutId>`，如非继承`CygMultiViewTypeAdapter`方式
 使用，只需要将组装好的`SparseIntArray`数据传入构造方法即可
 
@@ -97,7 +97,8 @@ public int getItemViewType(ChatMsg item, int position) {
 }
 ```
 
-3.有`CompoundButton`视图的`CygCheckedAdapter`，内部已解决滑动错乱的问题，只需要在构造方法传入`CompoundButton`的id
+#### 3.带`CompoundButton`视图的[CygCheckedAdapter](cygadapter/src/main/java/com/mylhyl/cygadapter/CygCheckedAdapter.java)
+内部已解决滑动错乱的问题，只需要在构造方法传入`CompoundButton`的id
 
 ```java
 mAdapter = new CygCheckedAdapter<String>(getContext(),
