@@ -5,13 +5,26 @@ package com.mylhyl.cygadapter.sample;
  */
 public class ChatMsg {
     public boolean isTo;
-    public String msg;
+    public MsgType msgType;
+    public String msgContent;
+    public int msgImage;
 
     public ChatMsg() {
     }
 
-    public ChatMsg(boolean isTo, String msg) {
+    public ChatMsg(boolean isTo, String msgContent) {
         this.isTo = isTo;
-        this.msg = msg;
+        this.msgType = MsgType.TEXT;
+        this.msgContent = msgContent;
+    }
+
+    public ChatMsg(boolean isTo, int msgImage) {
+        this.isTo = isTo;
+        this.msgType = MsgType.IMAGE;
+        this.msgImage = msgImage;
+    }
+
+    public static enum MsgType {
+        TEXT, IMAGE;
     }
 }

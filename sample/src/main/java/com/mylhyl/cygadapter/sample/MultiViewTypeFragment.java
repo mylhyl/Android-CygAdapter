@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 import android.widget.ListView;
 
 import com.mylhyl.crlayout.app.SwipeRefreshListFragment;
-import com.mylhyl.cygadapter.CygMultiViewTypeAdapter;
-import com.mylhyl.cygadapter.CygViewHolder;
 
 import java.util.ArrayList;
 
@@ -18,7 +16,6 @@ public class MultiViewTypeFragment extends SwipeRefreshListFragment {
         return new MultiViewTypeFragment();
     }
 
-    private CygMultiViewTypeAdapter<ChatMsg> mAdapter;
     private ArrayList<ChatMsg> datas = new ArrayList();
 
     @Override
@@ -41,6 +38,7 @@ public class MultiViewTypeFragment extends SwipeRefreshListFragment {
         datas.add(new ChatMsg(false, "不急"));
         datas.add(new ChatMsg(true, "真不急？"));
         datas.add(new ChatMsg(false, "还好"));
+        datas.add(new ChatMsg(false, R.mipmap.remind_bg));
         datas.add(new ChatMsg(true, "老实点男人更喜欢"));
         datas.add(new ChatMsg(false, "记得给我好评晒图+追评"));
         datas.add(new ChatMsg(true, "我在想怎么评论，差评吧对你不利，不差评吧又对不住自己"));
@@ -50,6 +48,7 @@ public class MultiViewTypeFragment extends SwipeRefreshListFragment {
         datas.add(new ChatMsg(false, "你就评论物流不好"));
         datas.add(new ChatMsg(true, "放心不会差评的"));
         datas.add(new ChatMsg(true, "毕竟处理的结果还是非常满意的，但你们改善与物流之间的沟通"));
+        datas.add(new ChatMsg(true, R.mipmap.wb_pic3_peoplearound_notloggedin));
         datas.add(new ChatMsg(false, "恩恩"));
     }
 
@@ -58,31 +57,9 @@ public class MultiViewTypeFragment extends SwipeRefreshListFragment {
         super.onActivityCreated(savedInstanceState);
         ListView listView = getSwipeRefreshLayout().getScrollView();
         listView.setDivider(null);
+        listView.setSelector(null);
         listView.setStackFromBottom(true);
-        mAdapter = new CygMultiViewTypeAdapter<ChatMsg>(getContext(), datas) {
-
-            @Override
-            public void onBindData(CygViewHolder viewHolder, ChatMsg item, int position) {
-                viewHolder.setText(R.id.textView, item.msg);
-            }
-
-            @Override
-            public int getItemLayout(int viewType) {
-                if (viewType == 1)
-                    return R.layout.fragment_multi_view_type_to_item;
-                return R.layout.fragment_multi_view_type_from_item;
-            }
-
-            @Override
-            public int getItemViewType(ChatMsg item, int position) {
-                if (item.isTo)
-                    return 1;
-                return 2;
-            }
-        };
-//        mAdapter.addItemViewType(1, R.layout.fragment_multi_view_type_to_item);
-//        mAdapter.addItemViewType(2, R.layout.fragment_multi_view_type_from_item);
-        setListAdapter(mAdapter);
+        setListAdapter(new ChatAdapter(getContext(), datas));
     }
 
     @Override

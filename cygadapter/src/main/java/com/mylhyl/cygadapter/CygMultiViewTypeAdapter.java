@@ -1,6 +1,7 @@
 package com.mylhyl.cygadapter;
 
 import android.content.Context;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,21 +12,34 @@ import java.util.List;
  */
 public abstract class CygMultiViewTypeAdapter<T> extends CygListAdapter<T> {
 
-    public abstract int getItemLayout(int viewType);
-
     public abstract int getItemViewType(T item, int position);
 
-    public CygMultiViewTypeAdapter(Context context, List objects) {
+    public abstract void onBindData(CygViewHolder viewHolder, final T item, final int position, final int viewType);
+
+    protected SparseIntArray mItemViewTypes;
+
+    public CygMultiViewTypeAdapter(Context context, List objects, SparseIntArray itemViewTypes) {
         super(context, 0, objects);
+        mItemViewTypes = itemViewTypes;
+    }
+
+    public void addItemViewType(int viewType, int layoutId) {
+        if (mItemViewTypes == null) mItemViewTypes = new SparseIntArray();
+        mItemViewTypes.put(viewType, layoutId);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         int viewType = getItemViewType(position);
-        int resourceId = getItemLayout(viewType);
-        CygViewHolder viewHolder = CygViewHolder.get(mContext, resourceId, convertView, parent);
-        onBindData(viewHolder, getItem(position), position);
+        int layoutId = mItemViewTypes.get(viewType);
+        CygViewHolder viewHolder = CygViewHolder.get(mContext, layoutId, convertView, parent);
+        onBindData(viewHolder, getItem(position), position, viewType);
         return viewHolder.getItemView();
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return mItemViewTypes.size();
     }
 
     @Override
@@ -33,13 +47,8 @@ public abstract class CygMultiViewTypeAdapter<T> extends CygListAdapter<T> {
         return getItemViewType(getItem(position), position);
     }
 
-    public static final class ItemViewType {
-        private int resourceId;
-        private int type;
+    @Override
+    public final void onBindData(CygViewHolder viewHolder, T item, int position) {
 
-        public ItemViewType(int resourceId, int type) {
-            this.resourceId = resourceId;
-            this.type = type;
-        }
     }
 }
