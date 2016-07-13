@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import com.mylhyl.cygadapter.CygMultiViewTypeAdapter;
 import com.mylhyl.cygadapter.CygViewHolder;
+import com.mylhyl.cygadapter.sample.entities.ChatMsg;
 
 import java.util.List;
 

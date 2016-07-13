@@ -3,6 +3,9 @@ package com.mylhyl.cygadapter.sample;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -10,14 +13,18 @@ import android.widget.TextView;
 import com.mylhyl.crlayout.app.SwipeRefreshListFragment;
 import com.mylhyl.cygadapter.CygListAdapter;
 import com.mylhyl.cygadapter.CygViewHolder;
+import com.mylhyl.cygadapter.sample.entities.Student;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by hupei on 2016/7/12.
  */
 public class SimpleFragment extends SwipeRefreshListFragment {
-    private CygListAdapter<String> mAdapter;
+    private CygListAdapter<Student> mAdapter;
+    private boolean sort = true;//默认降序
 
     public static SimpleFragment newInstance() {
         return new SimpleFragment();
@@ -26,13 +33,19 @@ public class SimpleFragment extends SwipeRefreshListFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayList<String> datas = new ArrayList();
-        datas.add("pull add data");
-        mAdapter = new CygListAdapter<String>(getContext(), android.R.layout.simple_list_item_1, datas) {
+        setHasOptionsMenu(true);
+
+        ArrayList<Student> datas = new ArrayList();
+        datas.add(new Student(0, "pull add data"));
+        datas.add(new Student(1, "pull add data"));
+        datas.add(new Student(2, "pull add data"));
+        Collections.sort(datas);//排序
+
+        mAdapter = new CygListAdapter<Student>(getContext(), android.R.layout.simple_list_item_1, datas) {
             @Override
-            public void onBindData(CygViewHolder viewHolder, String item, int position) {
+            public void onBindData(CygViewHolder viewHolder, Student item, int position) {
                 TextView tv = viewHolder.findViewById(android.R.id.text1);
-                tv.setText(item);
+                tv.setText(item.naem + "：" + item.age + "岁");
                 if (position == getCurrentCheckPosition()) {
                     tv.setBackgroundColor(Color.RED);
                 } else {
@@ -45,13 +58,36 @@ public class SimpleFragment extends SwipeRefreshListFragment {
 
     @Override
     public void onRefresh() {
-        int count = mAdapter.getCount();
-        mAdapter.add("Add Data：" + count);
+        mAdapter.add(new Student(mAdapter.getCount(), "Add Data"));
+        mAdapter.add(new Student(mAdapter.getCount(), "Add Data"));
+        mAdapter.add(new Student(mAdapter.getCount(), "Add Data"));
         setRefreshing(false);
     }
 
     @Override
     public void onListItemClick(AdapterView<?> parent, View view, int position, long id) {
         mAdapter.setCurrentCheckPosition(position);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_simple, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_simple_sort) {
+            //排序
+            mAdapter.sort(new Comparator<Student>() {
+                @Override
+                public int compare(Student lhs, Student rhs) {
+                    if (sort) return lhs.age - rhs.age;
+                    else return rhs.age - lhs.age;
+
+                }
+            });
+            sort = !sort;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

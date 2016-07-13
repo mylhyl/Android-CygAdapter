@@ -1,4 +1,4 @@
-package com.mylhyl.cygadapter.sample;
+package com.mylhyl.cygadapter.sample.entities;
 
 /**
  * Created by hupei on 2016/7/13.

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/menu_simple_sort"
+        android:showAsAction="always"
+        android:title="排序"
+        tools:ignore="AppCompatResource" />
+</menu>

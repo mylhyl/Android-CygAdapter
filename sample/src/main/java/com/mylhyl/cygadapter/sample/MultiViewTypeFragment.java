@@ -1,10 +1,13 @@
 package com.mylhyl.cygadapter.sample;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ListView;
 
 import com.mylhyl.crlayout.app.SwipeRefreshListFragment;
+import com.mylhyl.cygadapter.sample.entities.ChatMsg;
 
 import java.util.ArrayList;
 
@@ -57,7 +60,7 @@ public class MultiViewTypeFragment extends SwipeRefreshListFragment {
         super.onActivityCreated(savedInstanceState);
         ListView listView = getSwipeRefreshLayout().getScrollView();
         listView.setDivider(null);
-        listView.setSelector(null);
+        listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         listView.setStackFromBottom(true);
         setListAdapter(new ChatAdapter(getContext(), datas));
     }
