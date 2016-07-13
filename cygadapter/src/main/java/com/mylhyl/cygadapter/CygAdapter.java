@@ -160,15 +160,30 @@ public abstract class CygAdapter<T> extends BaseAdapter implements Filterable {
         return mCurrentCheckPosition;
     }
 
+    /**
+     * 设置当前点击行
+     *
+     * @param position
+     */
     public final void setCurrentCheckPosition(int position) {
         this.mCurrentCheckPosition = position;
         notifyDataSetChanged();
     }
 
+    /**
+     * 取出所有数据
+     *
+     * @return
+     */
     public final List<T> getObjects() {
         return mObjects;
     }
 
+    /**
+     * 对数据排序
+     *
+     * @param comparator
+     */
     public final void sort(Comparator<? super T> comparator) {
         synchronized (mLock) {
             if (mOriginalValues != null) {

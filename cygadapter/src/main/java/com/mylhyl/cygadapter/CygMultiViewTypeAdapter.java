@@ -23,6 +23,12 @@ public abstract class CygMultiViewTypeAdapter<T> extends CygAdapter<T> {
         mItemViewTypes = itemViewTypes;
     }
 
+    /**
+     * 添加视图类型与视图资源Id
+     *
+     * @param viewType
+     * @param layoutId
+     */
     public void addItemViewType(int viewType, int layoutId) {
         if (mItemViewTypes == null) mItemViewTypes = new SparseIntArray();
         mItemViewTypes.put(viewType, layoutId);

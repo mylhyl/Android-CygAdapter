@@ -73,6 +73,15 @@ public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
         toggleCheckObject(compoundButton.isChecked(), position);
     }
 
+    /**
+     * 切换 CompoundButton 状态<br>
+     * 例如：AdapterView.OnItemClickListener 中，已知 CompoundButton 的状态<br>
+     * 只有当选择模式已被设置为 CHOICE_MODE_SINGLE 或 CHOICE_MODE_MULTIPLE 时, isItemChecked 结果才有效<br>
+     * boolean isChecked = listView.isItemChecked(position);
+     *
+     * @param isChecked
+     * @param position
+     */
     public final void toggleCheckObject(boolean isChecked, int position) {
         if (isChecked)
             putCheckObject(position);
@@ -91,6 +100,11 @@ public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
         clearCheckObjects();
     }
 
+    /**
+     * 取得选中数据大小
+     *
+     * @return
+     */
     public final int getCheckSize() {
         return mSparseObjects.size();
     }

@@ -29,7 +29,7 @@ compile 'com.mylhyl:cygadapter:1.0.0'
 <img src="preview/gif.gif" width="240px"/>
 
 #使用
-###### 1.简单的[CygAdapter](cygadapter/src/main/java/com/mylhyl/cygadapter/CygAdapter.java)
+#### 1.简单的[CygAdapter](cygadapter/src/main/java/com/mylhyl/cygadapter/CygAdapter.java)
 
 ```java
 mAdapter = new CygAdapter<Student>(getContext(), android.R.layout.simple_list_item_1, datas) {
