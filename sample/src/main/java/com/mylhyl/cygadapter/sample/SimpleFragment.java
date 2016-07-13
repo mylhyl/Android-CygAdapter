@@ -25,14 +25,28 @@ import java.util.Comparator;
 public class SimpleFragment extends SwipeRefreshListFragment {
     private CygListAdapter<Student> mAdapter;
     private boolean sort = true;//默认降序
+    private String title;
 
-    public static SimpleFragment newInstance() {
-        return new SimpleFragment();
+    public static SimpleFragment newInstance(String title) {
+        SimpleFragment fragment = new SimpleFragment();
+        Bundle args = new Bundle();
+        args.putString("title", title);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            title = getArguments().getString("title");
+        }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle(title);
         setHasOptionsMenu(true);
 
         ArrayList<Student> datas = new ArrayList();

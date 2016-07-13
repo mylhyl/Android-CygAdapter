@@ -27,6 +27,12 @@ public class CheckedChoiceModeFragment extends ListFragment {
     private CygCheckedListAdapter<String> mAdapter;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setTitle("CheckedChoiceMode");
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);

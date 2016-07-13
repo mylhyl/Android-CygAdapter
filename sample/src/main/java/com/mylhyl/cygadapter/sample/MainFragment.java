@@ -63,6 +63,13 @@ public class MainFragment extends ListFragment {
         });
     }
 
+
+    @Override
+    public void onStart() {
+        getActivity().setTitle(R.string.app_name);
+        super.onStart();
+    }
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Uri uri = ContentUris.withAppendedId(mUri, position);

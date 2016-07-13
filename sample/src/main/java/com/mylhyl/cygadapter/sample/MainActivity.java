@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         int type = (int) ContentUris.parseId(uri);
         switch (type) {
             case 0:
-                fragment = SimpleFragment.newInstance();
+                fragment = SimpleFragment.newInstance("Simple");
                 break;
             case 1:
                 fragment = MultiViewTypeFragment.newInstance();

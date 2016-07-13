@@ -24,6 +24,8 @@ public class MultiViewTypeFragment extends SwipeRefreshListFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle("MultiViewType");
+
         datas.add(new ChatMsg(true, "问到了吗？"));
         datas.add(new ChatMsg(false, "恩，还是原来的物流单号，因为是物流碰坏了"));
         datas.add(new ChatMsg(false, "所以还是原来的单号他们承担运费的"));

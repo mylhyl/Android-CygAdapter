@@ -21,7 +21,11 @@ public class CheckedChangedFragment extends ListFragment {
     }
 
     private CygCheckedListAdapter<String> mAdapter;
-
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setTitle("CheckedChanged");
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
