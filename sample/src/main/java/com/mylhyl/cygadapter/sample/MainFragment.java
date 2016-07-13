@@ -9,7 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
-import com.mylhyl.cygadapter.CygListAdapter;
+import com.mylhyl.cygadapter.CygAdapter;
 import com.mylhyl.cygadapter.CygViewHolder;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class MainFragment extends ListFragment {
         datas.add("CheckedChanged");
         datas.add("CheckedClick");
         datas.add("CheckedChoiceMode");
-        setListAdapter(new CygListAdapter<String>(getContext(), android.R.layout.simple_list_item_1, datas) {
+        setListAdapter(new CygAdapter<String>(getContext(), android.R.layout.simple_list_item_1, datas) {
             @Override
             public void onBindData(CygViewHolder viewHolder, String item, int position) {
                 viewHolder.setText(android.R.id.text1, item);

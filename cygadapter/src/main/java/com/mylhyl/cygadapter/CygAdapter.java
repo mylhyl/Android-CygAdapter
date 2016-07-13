@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by hupei on 2016/7/12.
  */
-public abstract class CygListAdapter<T> extends BaseAdapter implements Filterable {
+public abstract class CygAdapter<T> extends BaseAdapter implements Filterable {
     private final Object mLock = new Object();
     private ObjectFilter mFilter;
     private ArrayList<T> mOriginalValues;//原始数据
@@ -26,7 +26,7 @@ public abstract class CygListAdapter<T> extends BaseAdapter implements Filterabl
 
     public abstract void onBindData(CygViewHolder viewHolder, final T item, final int position);
 
-    public CygListAdapter(Context context, int resource, List<T> objects) {
+    public CygAdapter(Context context, int resource, List<T> objects) {
         this.mContext = context;
         this.mResource = resource;
         this.mObjects = objects;

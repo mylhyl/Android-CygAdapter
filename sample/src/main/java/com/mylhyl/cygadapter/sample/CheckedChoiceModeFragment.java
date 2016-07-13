@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 
-import com.mylhyl.cygadapter.CygCheckedListAdapter;
+import com.mylhyl.cygadapter.CygCheckedAdapter;
 import com.mylhyl.cygadapter.CygViewHolder;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class CheckedChoiceModeFragment extends ListFragment {
         return new CheckedChoiceModeFragment();
     }
 
-    private CygCheckedListAdapter<String> mAdapter;
+    private CygCheckedAdapter<String> mAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class CheckedChoiceModeFragment extends ListFragment {
         }
         //fragment_checked_choice_item 为 item可点击，CheckBox 也可点击
         //当 CheckBox 点击时，需重写 onCompoundButtonCheckedChanged 调用 ListView.setItemChecked 改变状态
-        mAdapter = new CygCheckedListAdapter<String>(getContext(),
+        mAdapter = new CygCheckedAdapter<String>(getContext(),
                 R.layout.fragment_checked_choice_item, R.id.checkBox, datas) {
 
             @Override

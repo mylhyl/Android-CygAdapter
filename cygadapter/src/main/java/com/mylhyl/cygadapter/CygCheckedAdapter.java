@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by hupei on 2016/7/12.
  */
-public abstract class CygCheckedListAdapter<T> extends CygListAdapter<T> {
+public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
 
     public void onCompoundButtonCheckedChanged(CompoundButton buttonView, boolean isChecked, int position) {
 
@@ -21,7 +21,7 @@ public abstract class CygCheckedListAdapter<T> extends CygListAdapter<T> {
     private int mCheckViewId;
     protected SparseArray<T> mSparseObjects;// 如复选框选中的对象集
 
-    public CygCheckedListAdapter(Context context, int resource, int checkViewId, List objects) {
+    public CygCheckedAdapter(Context context, int resource, int checkViewId, List objects) {
         super(context, resource, objects);
         this.mCheckViewId = checkViewId;
         mSparseObjects = new SparseArray<>();

@@ -28,7 +28,7 @@ public final class CygViewHolder {
         mContext = context;
         mViews = new SparseArray<>();
         mItemView = itemView;
-        itemView.setTag(this);
+        mItemView.setTag(this);
     }
 
 

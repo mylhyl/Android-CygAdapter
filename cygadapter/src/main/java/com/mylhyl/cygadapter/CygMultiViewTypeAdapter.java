@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by hupei on 2016/7/12.
  */
-public abstract class CygMultiViewTypeAdapter<T> extends CygListAdapter<T> {
+public abstract class CygMultiViewTypeAdapter<T> extends CygAdapter<T> {
 
     public abstract int getItemViewType(T item, int position);
 

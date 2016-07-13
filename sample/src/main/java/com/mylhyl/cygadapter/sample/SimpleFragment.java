@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.mylhyl.crlayout.app.SwipeRefreshListFragment;
-import com.mylhyl.cygadapter.CygListAdapter;
+import com.mylhyl.cygadapter.CygAdapter;
 import com.mylhyl.cygadapter.CygViewHolder;
 import com.mylhyl.cygadapter.sample.entities.Student;
 
@@ -23,7 +23,7 @@ import java.util.Comparator;
  * Created by hupei on 2016/7/12.
  */
 public class SimpleFragment extends SwipeRefreshListFragment {
-    private CygListAdapter<Student> mAdapter;
+    private CygAdapter<Student> mAdapter;
     private boolean sort = true;//默认降序
     private String title;
 
@@ -55,7 +55,7 @@ public class SimpleFragment extends SwipeRefreshListFragment {
         datas.add(new Student(2, "pull add data"));
         Collections.sort(datas);//排序
 
-        mAdapter = new CygListAdapter<Student>(getContext(), android.R.layout.simple_list_item_1, datas) {
+        mAdapter = new CygAdapter<Student>(getContext(), android.R.layout.simple_list_item_1, datas) {
             @Override
             public void onBindData(CygViewHolder viewHolder, Student item, int position) {
                 TextView tv = viewHolder.findViewById(android.R.id.text1);

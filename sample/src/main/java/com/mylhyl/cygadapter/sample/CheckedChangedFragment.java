@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.mylhyl.cygadapter.CygCheckedListAdapter;
+import com.mylhyl.cygadapter.CygCheckedAdapter;
 import com.mylhyl.cygadapter.CygViewHolder;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class CheckedChangedFragment extends ListFragment {
         return new CheckedChangedFragment();
     }
 
-    private CygCheckedListAdapter<String> mAdapter;
+    private CygCheckedAdapter<String> mAdapter;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class CheckedChangedFragment extends ListFragment {
         for (int i = 0; i < 50; i++) {
             datas.add("menu del data" + i);
         }
-        mAdapter = new CygCheckedListAdapter<String>(getContext(),
+        mAdapter = new CygCheckedAdapter<String>(getContext(),
                 R.layout.fragment_checked_changed_item,R.id.checkBox, datas) {
 
             @Override
