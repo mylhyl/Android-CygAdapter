@@ -50,20 +50,10 @@ mAdapter = new CygAdapter<Student>(getContext(), android.R.layout.simple_list_it
 setListAdapter(mAdapter);
 ```
 #### 2.多视图[CygMultiViewTypeAdapter](cygadapter/src/main/java/com/mylhyl/cygadapter/CygMultiViewTypeAdapter.java)
-- 内部已定义`SparseIntArray`变量，用于存储视图数据`<k,v> = <viewType,layoutId>`，如非继承`CygMultiViewTypeAdapter`方式
-使用，只需要将组装好的`SparseIntArray`数据传入构造方法即可
-
-```java
-SparseIntArray sparseIntArray = new SparseIntArray();
-sparseIntArray.put(VIEW_TYPE_TO_TEXT, R.layout.fragment_multi_view_type_to_item_text);
-sparseIntArray.put(VIEW_TYPE_FROM_TEXT, R.layout.fragment_multi_view_type_from_item_text);
-sparseIntArray.put(VIEW_TYPE_TO_IMAGE, R.layout.fragment_multi_view_type_to_item_image);
-sparseIntArray.put(VIEW_TYPE_FROM_IMAGE, R.layout.fragment_multi_view_type_from_item_image);
-
-new CygMultiViewTypeAdapter<ChatMsg>(getContext(), datas, sparseIntArray){};
-```
-
-- 继承`CygMultiViewTypeAdapter`方式可在构造方法中使用`addItemViewType(viewType,layoutId)`方法来装入视图数据
+ - 内部已定义`SparseIntArray`变量，用于存储视图数据`<k,v> = <viewType,layoutId>`
+ - 构造函数中`CygMultiViewTypeAdapter(Context context, List objects, SparseIntArray itemViewTypes)`传入视图数据`SparseIntArray`
+ - 也可以用提供的`addItemViewType(viewType,layoutId)`方法来装入视图数据`<viewType,layoutId>`
+ - 主要是`getItemViewType`方法，根据情况返回相应的viewType，用法与`BaseAdapter getItemViewType(int position)`一样
 
 ```java
 public class ChatAdapter extends CygMultiViewTypeAdapter<ChatMsg> {
@@ -79,23 +69,26 @@ public class ChatAdapter extends CygMultiViewTypeAdapter<ChatMsg> {
         addItemViewType(VIEW_TYPE_TO_IMAGE, R.layout.fragment_multi_view_type_to_item_image);
         addItemViewType(VIEW_TYPE_FROM_IMAGE, R.layout.fragment_multi_view_type_from_item_image);
     }
-}
-```
 
-- 主要是`getItemViewType`方法，根据情况返回相应的viewType
+    @Override
+    public int getItemViewType(ChatMsg item, int position) {
+        if (item.isTo) {
+            if (item.msgType == ChatMsg.MsgType.TEXT) return VIEW_TYPE_TO_TEXT;
+            else return VIEW_TYPE_TO_IMAGE;
+        } else {
+            if (item.msgType == ChatMsg.MsgType.TEXT) return VIEW_TYPE_FROM_TEXT;
+            else return VIEW_TYPE_FROM_IMAGE;
+        }
+    }
 
-```java
-@Override
-public int getItemViewType(ChatMsg item, int position) {
-    if (item.isTo) {
-        if (item.msgType == ChatMsg.MsgType.TEXT)
-            return VIEW_TYPE_TO_TEXT;
-        else
-            return VIEW_TYPE_TO_IMAGE;
-    } else {
-        if (item.msgType == ChatMsg.MsgType.TEXT)
-            return VIEW_TYPE_FROM_TEXT;
-        else return VIEW_TYPE_FROM_IMAGE;
+    @Override
+    public void onBindData(CygViewHolder viewHolder, ChatMsg item, int position, int viewType) {
+        if (viewType == VIEW_TYPE_FROM_TEXT || viewType == VIEW_TYPE_TO_TEXT) {
+            viewHolder.setText(R.id.textView, item.msgContent);
+        } else if (viewType == VIEW_TYPE_FROM_IMAGE || viewType == VIEW_TYPE_TO_IMAGE) {
+            ImageView imageView = viewHolder.findViewById(R.id.imageView1);
+            imageView.setImageResource(item.msgImage);
+        }
     }
 }
 ```
