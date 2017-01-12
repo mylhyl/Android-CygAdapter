@@ -23,7 +23,7 @@ List<T> getObjects()//取出所有数据
 #引用
 
 ```javascript
-compile 'com.mylhyl:cygadapter:1.0.0'
+compile 'com.mylhyl:cygadapter:1.0.1'
 ```
 
 [下载jar](preview/cygadapter-1.0.0.jar)
@@ -187,3 +187,4 @@ public void onListItemClick(ListView listView, View view, int position, long id)
 
 # 感谢
 [baseAdapter](https://github.com/hongyangAndroid/baseAdapter)
+
