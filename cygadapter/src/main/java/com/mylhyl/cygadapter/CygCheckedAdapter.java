@@ -28,7 +28,7 @@ public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
     }
 
     @Override
-    public final View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
         CygViewHolder viewHolder = (CygViewHolder) view.getTag();
         View checkView = viewHolder.findViewById(mCheckViewId);
