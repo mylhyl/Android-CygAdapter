@@ -5,14 +5,14 @@ package com.mylhyl.cygadapter.sample.entities;
  */
 public class Student implements Comparable<Student> {
     public int age;
-    public String naem;
+    public String name;
 
     public Student() {
     }
 
-    public Student(int age, String naem) {
+    public Student(int age, String name) {
         this.age = age;
-        this.naem = naem;
+        this.name = name;
     }
 
     @Override

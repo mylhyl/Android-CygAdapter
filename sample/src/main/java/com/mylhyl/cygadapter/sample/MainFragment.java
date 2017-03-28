@@ -55,6 +55,7 @@ public class MainFragment extends ListFragment {
         datas.add("CheckedChanged");
         datas.add("CheckedClick");
         datas.add("CheckedChoiceMode");
+        datas.add("input");
         setListAdapter(new CygAdapter<String>(getContext(), android.R.layout.simple_list_item_1, datas) {
             @Override
             public void onBindData(CygViewHolder viewHolder, String item, int position) {

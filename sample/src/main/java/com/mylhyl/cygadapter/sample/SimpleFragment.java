@@ -59,7 +59,7 @@ public class SimpleFragment extends SwipeRefreshListFragment {
             @Override
             public void onBindData(CygViewHolder viewHolder, Student item, int position) {
                 TextView tv = viewHolder.findViewById(android.R.id.text1);
-                tv.setText(item.naem + "：" + item.age + "岁");
+                tv.setText(item.name + "：" + item.age + "岁");
                 if (position == getCurrentCheckPosition()) {
                     tv.setBackgroundColor(Color.RED);
                 } else {

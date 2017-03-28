@@ -94,7 +94,7 @@ public class ChatAdapter extends CygMultiViewTypeAdapter<ChatMsg> {
 ```
 
 #### 3.带`CompoundButton`视图的[CygCheckedAdapter](cygadapter/src/main/java/com/mylhyl/cygadapter/CygCheckedAdapter.java)
-内部已解决滑动错乱的问题，只需要在构造方法传入`CompoundButton`的id
+内部已解决滑动错乱的问题，需要在构造方法传入`CompoundButton`的id
 
 ```java
 mAdapter = new CygCheckedAdapter<String>(getContext(),
@@ -117,73 +117,25 @@ public void onListItemClick(ListView listView, View view, int position, long id)
 }
 ```
 
-更多方法
+#### 4.带`EditText`视图的[CygEditAdapter](cygadapter/src/main/java/com/mylhyl/cygadapter/CygEditAdapter.java)
+内部已解决滑动错乱的问题，需要在构造方法传入`EditText`的id
+
 ```java
+        mAdapter = new CygEditAdapter<Student>(getContext(), R.layout.fragment_input_item, R.id.editText, datas) {
 
-    /**
-     * 切换 CompoundButton 状态<br>
-     * 例如：AdapterView.OnItemClickListener 中调用
-     *
-     * @param view
-     * @param position
-     */
-    public final void toggleCheckObject(View view, int position) {
-        CygViewHolder viewHolder = (CygViewHolder) view.getTag();
-        CompoundButton compoundButton = viewHolder.findViewById(mCheckViewId);
-        compoundButton.toggle();
-        toggleCheckObject(compoundButton.isChecked(), position);
-    }
 
-    /**
-     * 切换 CompoundButton 状态<br>
-     * 例如：AdapterView.OnItemClickListener 中，已知 CompoundButton 的状态<br>
-     * 只有当选择模式已被设置为 CHOICE_MODE_SINGLE 或 CHOICE_MODE_MULTIPLE 时, isItemChecked 结果才有效<br>
-     * boolean isChecked = listView.isItemChecked(position);
-     *
-     * @param isChecked
-     * @param position
-     */
-    public final void toggleCheckObject(boolean isChecked, int position) {
-        if (isChecked)
-            putCheckObject(position);
-        else
-            removeCheckObject(position);
-    }
+            @Override
+            public void onBindTextChanged(Student item, String text) {
+                item.name = text;
+            }
 
-    /**
-     * 删除选中数据
-     */
-    public final void removeCheckObjects() {
-        int size = getCheckSize();
-        for (int i = 0; i < size; i++) {
-            remove(mSparseObjects.valueAt(i));
-        }
-        clearCheckObjects();
-    }
-
-    /**
-     * 取得选中数据大小
-     *
-     * @return
-     */
-    public final int getCheckSize() {
-        return mSparseObjects.size();
-    }
-
-    /**
-     * 取出选中数据
-     *
-     * @return
-     */
-    public final List<T> getCheckObjects() {
-        List<T> list = new ArrayList<>();
-        for (int i = 0; i < mSparseObjects.size(); i++) {
-            list.add(mSparseObjects.valueAt(i));
-        }
-        return list;
-    }
+            @Override
+            public void onBindData(CygViewHolder viewHolder, Student item, int position) {
+                EditText editText = viewHolder.findViewById(R.id.editText);
+                editText.setText(item.name);
+            }
+        };
 ```
-
 
 # 感谢
 [baseAdapter](https://github.com/hongyangAndroid/baseAdapter)

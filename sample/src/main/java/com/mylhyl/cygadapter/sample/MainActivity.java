@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
             case 4:
                 fragment = CheckedChoiceModeFragment.newInstance();
                 break;
+            case 5:
+                fragment = InputFragment.newInstance();
+                break;
         }
         if (fragment != null)
             getSupportFragmentManager().beginTransaction()
