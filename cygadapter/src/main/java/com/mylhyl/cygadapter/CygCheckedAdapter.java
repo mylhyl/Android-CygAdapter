@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 
 import java.util.ArrayList;
@@ -42,12 +43,20 @@ public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
             } else {
                 compoundButton.setChecked(false);
             }
+        } else if (checkView instanceof CheckedTextView) {
+            CheckedTextView checkedTextView = (CheckedTextView) checkView;
+            //处理滑动时的状态恢复
+            if (getCheckObject(position) != null) {
+                checkedTextView.setChecked(true);
+            } else {
+                checkedTextView.setChecked(false);
+            }
         }
         return view;
     }
 
     private void setOnCheckedChangeListener(CompoundButton compoundButton, final int position) {
-        //可点击且可用状态下才注册事件
+        //可以点击、可用状态，才注册事件
         if (compoundButton.isClickable() && compoundButton.isEnabled()) {
             compoundButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -63,14 +72,21 @@ public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
      * 切换 CompoundButton 状态<br>
      * 例如：AdapterView.OnItemClickListener 中调用
      *
-     * @param view
+     * @param convertView
      * @param position
      */
-    public final void toggleCheckObject(View view, int position) {
-        CygViewHolder viewHolder = (CygViewHolder) view.getTag();
-        CompoundButton compoundButton = viewHolder.findViewById(mCheckViewId);
-        compoundButton.toggle();
-        toggleCheckObject(compoundButton.isChecked(), position);
+    public final void toggleCheckObject(View convertView, int position) {
+        CygViewHolder viewHolder = (CygViewHolder) convertView.getTag();
+        View viewCheck = viewHolder.findViewById(mCheckViewId);
+        if (viewCheck instanceof CompoundButton) {
+            CompoundButton compoundButton = (CompoundButton) viewCheck;
+            compoundButton.toggle();
+            toggleCheckObject(compoundButton.isChecked(), position);
+        } else if (viewCheck instanceof CheckedTextView) {
+            CheckedTextView checkedTextView = (CheckedTextView) viewCheck;
+            checkedTextView.toggle();
+            toggleCheckObject(checkedTextView.isChecked(), position);
+        }
     }
 
     /**
@@ -120,6 +136,30 @@ public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
             list.add(mSparseObjects.valueAt(i));
         }
         return list;
+    }
+
+    /**
+     * 全选中/全不选
+     *
+     * @param isAll
+     */
+    public void toggleCheckObjectState(boolean isAll) {
+        int size = getCount();
+        for (int i = 0; i < size; i++) {
+            toggleCheckObject(isAll, i);
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 取消选中的项
+     */
+    public void clearCheckObjectState() {
+        int size = getCount();
+        for (int i = 0; i < size; i++) {
+            toggleCheckObject(false, i);
+        }
+        notifyDataSetChanged();
     }
 
     /*以下为缓存操作*/

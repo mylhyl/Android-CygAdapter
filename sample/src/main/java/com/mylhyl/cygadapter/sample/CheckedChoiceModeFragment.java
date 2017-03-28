@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 /**
  * ListView.CHOICE_MODE_MULTIPLE
+ * 复选框单击与item单击演示
+ *
  * Created by hupei on 2016/7/12.
  */
 public class CheckedChoiceModeFragment extends ListFragment {
@@ -64,9 +66,8 @@ public class CheckedChoiceModeFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
-        //只有当选择模式已被设置为 CHOICE_MODE_SINGLE
-        // 或 CHOICE_MODE_MULTIPLE 时, isItemChecked 结果才有效。
-        //必要时与 setItemChecked 一起使用，如 CheckBox 也可以单击选中
+        //只有当选择模式已被设置为 CHOICE_MODE_SINGLE 或 CHOICE_MODE_MULTIPLE 时, isItemChecked 结果才有效。
+        //必要时与 setItemChecked 一起使用(adapter中重写onCompoundButtonCheckedChanged)，如 CheckBox 也可以单击选中
         boolean checked = listView.isItemChecked(position);
         mAdapter.toggleCheckObject(checked, position);
         mAdapter.notifyDataSetChanged();
