@@ -23,7 +23,7 @@ List<T> getObjects()//取出所有数据
 #引用
 
 ```javascript
-compile 'com.mylhyl:cygadapter:1.1.0'
+compile 'com.mylhyl:cygadapter:1.1.1'
 ```
 
 [下载jar](preview)

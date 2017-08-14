@@ -15,7 +15,8 @@ import java.util.List;
  */
 public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
 
-    public void onCompoundButtonCheckedChanged(CompoundButton buttonView, boolean isChecked, int position) {
+    public void onCompoundButtonCheckedChanged(CompoundButton buttonView, boolean isChecked, int
+            position) {
 
     }
 
@@ -126,6 +127,15 @@ public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
     }
 
     /**
+     * 取出指定位置选中数据
+     * @param position
+     * @return
+     */
+    public final T getCheckObject(int position) {
+        return mSparseObjects.get(position);
+    }
+
+    /**
      * 取出选中数据
      *
      * @return
@@ -174,9 +184,5 @@ public abstract class CygCheckedAdapter<T> extends CygAdapter<T> {
 
     private final void removeCheckObject(int position) {
         mSparseObjects.remove(position);
-    }
-
-    private final T getCheckObject(int position) {
-        return mSparseObjects.get(position);
     }
 }

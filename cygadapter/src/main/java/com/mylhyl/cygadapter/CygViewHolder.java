@@ -1,10 +1,12 @@
 package com.mylhyl.cygadapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -57,6 +59,30 @@ public final class CygViewHolder {
         if (view instanceof TextView) {
             ((TextView) view).setText(text);
         }
+        return this;
+    }
+
+    public CygViewHolder setTextColor(int viewId, int textColor) {
+        TextView view = findViewById(viewId);
+        view.setTextColor(textColor);
+        return this;
+    }
+
+    public CygViewHolder setTextColorRes(int viewId, int textColorRes) {
+        TextView view = findViewById(viewId);
+        view.setTextColor(mContext.getResources().getColor(textColorRes));
+        return this;
+    }
+
+    public CygViewHolder setImageResource(int viewId, int resId) {
+        ImageView view = findViewById(viewId);
+        view.setImageResource(resId);
+        return this;
+    }
+
+    public CygViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
+        ImageView view = findViewById(viewId);
+        view.setImageBitmap(bitmap);
         return this;
     }
 
